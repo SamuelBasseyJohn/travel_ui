@@ -46,16 +46,16 @@ class Intro3 extends StatelessWidget {
             child: Center(
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                ),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('1D3FFF'),
-                    minimumSize: Size(263, 59),
+                    minimumSize: const Size(263, 59),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     )),
+                child: const Text(
+                  'Get Started',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                ),
               ),
             ))
       ],
