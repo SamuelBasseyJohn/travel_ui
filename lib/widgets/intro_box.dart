@@ -30,7 +30,7 @@ class IntroPageContainer extends StatelessWidget {
                 lastPage = (index == 2);
               },
               children: const [
-                intro1(),
+                Intro1(),
                 Intro2(),
                 Intro3(),
               ],

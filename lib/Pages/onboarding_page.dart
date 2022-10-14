@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:travel_ui/items.dart';
 import 'package:travel_ui/widgets/intro_box.dart';
 
@@ -15,11 +16,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: HexColor("FBFBFB"),
       body: SafeArea(
         child: Column(
-          children: [
-            const Expanded(
+          children: const [
+            Expanded(
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25),
@@ -29,7 +30,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(34, 32, 34, 20),
                 child: IntroPageContainer(),

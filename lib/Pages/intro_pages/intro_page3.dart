@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:travel_ui/Pages/home_page.dart';
 
 class Intro3 extends StatelessWidget {
   const Intro3({super.key});
@@ -45,7 +46,8 @@ class Intro3 extends StatelessWidget {
             flex: 3,
             child: Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage())),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('1D3FFF'),
                     minimumSize: const Size(263, 59),
