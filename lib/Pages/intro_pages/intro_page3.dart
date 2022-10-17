@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:travel_ui/Pages/bottom_nav_page.dart';
 import 'package:travel_ui/Pages/home_page.dart';
 
 class Intro3 extends StatelessWidget {
@@ -47,7 +48,7 @@ class Intro3 extends StatelessWidget {
             child: Center(
               child: ElevatedButton(
                 onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage())),
+                    MaterialPageRoute(builder: (context) => HomeMain())),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('1D3FFF'),
                     minimumSize: const Size(263, 59),

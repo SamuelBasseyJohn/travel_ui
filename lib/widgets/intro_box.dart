@@ -39,6 +39,7 @@ class IntroPageContainer extends StatelessWidget {
           Align(
             alignment: const Alignment(0, 0.3),
             child: SmoothPageIndicator(
+              onDotClicked: (index) {},
               controller: _pageController,
               count: 3,
               effect: SlideEffect(

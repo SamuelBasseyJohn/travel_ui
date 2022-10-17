@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:travel_ui/items.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,20 +9,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    TabController tabController = TabController(length: 6, vsync: this);
     return Scaffold(
       backgroundColor: HexColor("FBFBFB"),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: Container(
-          height: 120,
-          color: HexColor("FBFBFB"),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListTile(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              floating: false,
+              snap: false,
+              stretch: false,
+              title: ListTile(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 title: Text(
                   'Howdy',
                   style: TextStyle(
@@ -55,79 +57,98 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(100)),
                 ),
               ),
+              elevation: 1,
+              automaticallyImplyLeading: false,
+              backgroundColor: HexColor("FBFBFB"),
+              expandedHeight: 340,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 28),
+                  child: appBarItems,
+                ),
+              ),
+              bottom: TabBar(
+                labelColor: HexColor("FFFFFF"),
+                unselectedLabelColor: HexColor('BFBFBF'),
+                padding: EdgeInsets.fromLTRB(28, 8, 0, 0),
+                isScrollable: true,
+                controller: tabController,
+                indicator: BoxDecoration(
+                    color: HexColor("1D3FFF"),
+                    borderRadius: BorderRadius.circular(8)),
+                labelStyle: TextStyle(
+                  color: HexColor("1D3FFF"),
+                ),
+                unselectedLabelStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                tabs: const [
+                  Tab(
+                    text: "Camping",
+                  ),
+                  Tab(
+                    text: "Mountain",
+                  ),
+                  Tab(
+                    text: "Climbing",
+                  ),
+                  Tab(
+                    text: "Swimming",
+                  ),
+                  Tab(
+                    text: "Flight",
+                  ),
+                  Tab(
+                    text: "Flight",
+                  ),
+                ],
+              ),
             ),
-          ),
+            SliverFillRemaining(
+              child: TabBarView(
+                controller: tabController,
+                children: const [
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Center(
+                    child: Icon(
+                      Icons.flight,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(28, 28, 109, 20),
-            child: Text(
-              "Where would you like to go?",
-              style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w600,
-                  color: HexColor("000000")),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(28, 0, 28, 31),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 8,
-                  child: Container(
-                    width: 251,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: HexColor("FFFFFF"),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 232, 232, 232),
-                          blurRadius: 10,
-                          spreadRadius: 4,
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        fillColor: HexColor("FFFFFF"),
-                        prefixIcon: Icon(Icons.search),
-                        hintText: "Search location",
-                        hintStyle: TextStyle(fontSize: 14),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                // Expanded(
-                //   flex: 0,
-                //   child: SizedBox(
-                //     width: 20,
-                //   ),
-                // ),
-                Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Image.asset('assets/images/Vector.png'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: HexColor("1D3FFF"),
-                        minimumSize: Size(48, 48),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
