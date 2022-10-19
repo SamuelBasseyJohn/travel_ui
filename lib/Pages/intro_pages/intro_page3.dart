@@ -48,7 +48,7 @@ class Intro3 extends StatelessWidget {
             child: Center(
               child: ElevatedButton(
                 onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeMain())),
+                    MaterialPageRoute(builder: (context) => BottomNav())),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: HexColor('1D3FFF'),
                     minimumSize: const Size(263, 59),

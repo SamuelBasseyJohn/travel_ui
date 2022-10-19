@@ -57,6 +57,15 @@ flutter:
     - assets/images/profile_pic.png
     - assets/images/Vector.png
     - assets/images/Notification.png
+    - assets/images/camp1.png
+    - assets/images/campimg2.png
+    - assets/images/campimg3.jpg
+    - assets/images/campimg4.jpeg
+    - assets/images/backarrow.png
+    - assets/images/Home.png
+    - assets/images/Profile.png
+    - assets/images/Discount.png
+    - assets/images/Papers.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

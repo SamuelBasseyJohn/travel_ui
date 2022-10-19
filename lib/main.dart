@@ -13,6 +13,7 @@ class TravelUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'TravelUi',
       theme: ThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,

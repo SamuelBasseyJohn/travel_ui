@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:travel_ui/Pages/expanded_tile.dart';
 import 'package:travel_ui/items.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,135 +14,706 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 6, vsync: this);
+    List<Map<String, String>> images = [
+      {
+        "Image": "assets/images/camp1.png",
+        "Title": "Tangjung Aan",
+        "SubTitle": "Pujut, Lombok Tengah",
+        "Price": "\$230"
+      },
+      {
+        "Image": "assets/images/campimg2.png",
+        "Title": "Forest Camping",
+        "SubTitle": "Cabo, Cape Verde",
+        "Price": "\$180"
+      },
+      {
+        "Image": "assets/images/campimg3.jpg",
+        "Title": "Summer Camp",
+        "SubTitle": "Ontario, Canada",
+        "Price": "\$450"
+      },
+      {
+        "Image": "assets/images/campimg4.jpeg",
+        "Title": "Tangjung Aan",
+        "SubTitle": "Pujut, Lombok Tengah",
+        "Price": "\$310"
+      },
+    ];
     return Scaffold(
-      backgroundColor: HexColor("FBFBFB"),
+      appBar: PreferredSize(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(28, 40, 28, 0),
+          child: appBarItems(tabController),
+        ),
+        preferredSize: Size(double.maxFinite, 360),
+      ),
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              pinned: true,
-              floating: false,
-              snap: false,
-              stretch: false,
-              title: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                title: Text(
-                  'Howdy',
-                  style: TextStyle(
-                      color: HexColor('BFBFBF'),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),
-                ),
-                subtitle: Text(
-                  'Samuel Bassey',
-                  style: TextStyle(
-                      color: HexColor('000000'),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
-                ),
-                leading: Container(
-                  height: 48,
-                  width: 48,
-                  child: Image.asset('assets/images/profile_pic.png'),
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 128, 0),
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                trailing: Container(
-                  height: 48,
-                  width: 48,
-                  child: Image.asset('assets/images/Notification.png'),
-                  decoration: BoxDecoration(
-                      color: HexColor("1D3FFF"),
-                      borderRadius: BorderRadius.circular(100)),
-                ),
-              ),
-              elevation: 1,
-              automaticallyImplyLeading: false,
-              backgroundColor: HexColor("FBFBFB"),
-              expandedHeight: 340,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 28),
-                  child: appBarItems,
-                ),
-              ),
-              bottom: TabBar(
-                labelColor: HexColor("FFFFFF"),
-                unselectedLabelColor: HexColor('BFBFBF'),
-                padding: EdgeInsets.fromLTRB(28, 8, 0, 0),
-                isScrollable: true,
-                controller: tabController,
-                indicator: BoxDecoration(
-                    color: HexColor("1D3FFF"),
-                    borderRadius: BorderRadius.circular(8)),
-                labelStyle: TextStyle(
-                  color: HexColor("1D3FFF"),
-                ),
-                unselectedLabelStyle: TextStyle(
-                  color: Colors.black,
-                ),
-                tabs: const [
-                  Tab(
-                    text: "Camping",
-                  ),
-                  Tab(
-                    text: "Mountain",
-                  ),
-                  Tab(
-                    text: "Climbing",
-                  ),
-                  Tab(
-                    text: "Swimming",
-                  ),
-                  Tab(
-                    text: "Flight",
-                  ),
-                  Tab(
-                    text: "Flight",
-                  ),
-                ],
-              ),
-            ),
             SliverFillRemaining(
               child: TabBarView(
                 controller: tabController,
-                children: const [
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                children: [
+                  SizedBox(
+                    height: 20,
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 10, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    InkWell(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ExpandTilePage(
+                                                    image: images[index]
+                                                        ["Image"]!,
+                                                    title: images[index]
+                                                        ["Title"]!,
+                                                    subtitle: images[index]
+                                                        ["SubTitle"]!,
+                                                    price: images[index]
+                                                        ["Price"]!,
+                                                  ))),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 164,
+                                        width: double.maxFinite,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: AssetImage(
+                                                images[index]["Image"]!),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 30, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 164,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              images[index]["Image"]!),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 30, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 164,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              images[index]["Image"]!),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 30, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 164,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              images[index]["Image"]!),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 30, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 164,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              images[index]["Image"]!),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Center(
-                    child: Icon(
-                      Icons.flight,
-                      color: Colors.black,
+                  SizedBox(
+                    height: 30,
+                    child: ListView(
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.fromLTRB(28, 30, 28, 5),
+                          title: const Text(
+                            "Favorite Place",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "View all",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: HexColor("BFBFBF")),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 28),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: images.length,
+                                itemBuilder: (context, index) => Stack(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 210,
+                                      width: double.maxFinite,
+                                      color: HexColor("FBFBFB"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 164,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              images[index]["Image"]!),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 130,
+                                      left: 50,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                    110, 46, 46, 46),
+                                                blurRadius: 16,
+                                                spreadRadius: 1,
+                                              ),
+                                            ],
+                                            color: HexColor("FBFBFB")),
+                                        height: 60,
+                                        width: 254,
+                                        child: Center(
+                                          child: ListTile(
+                                            title:
+                                                Text(images[index]["Title"]!),
+                                            subtitle: Text(
+                                                images[index]["SubTitle"]!),
+                                            trailing: Container(
+                                              decoration: BoxDecoration(
+                                                color: HexColor("EFF4FF"),
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                              ),
+                                              height: 32,
+                                              width: 48,
+                                              child: Center(
+                                                child: Text(
+                                                  images[index]["Price"]!,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 14,
+                                                    color: HexColor("1D3FFF"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

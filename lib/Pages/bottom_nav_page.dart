@@ -6,16 +6,21 @@ import 'package:travel_ui/Pages/bottom_tabs/profile_tab.dart';
 import 'package:travel_ui/Pages/bottom_tabs/setting_tab.dart';
 import 'package:travel_ui/Pages/home_page.dart';
 
-class HomeMain extends StatefulWidget {
-  const HomeMain({Key? key}) : super(key: key);
+class BottomNav extends StatefulWidget {
+  const BottomNav({Key? key}) : super(key: key);
 
   @override
-  State<HomeMain> createState() => _HomeMainState();
+  State<BottomNav> createState() => _BottomNavState();
 }
 
-class _HomeMainState extends State<HomeMain> {
+class _BottomNavState extends State<BottomNav> {
   //List of the bottom navigation bar Pages
-  List pages = [HomePage(), Explore(), Profile(), Settings()];
+  List pages = [
+    HomePage(),
+    Explore(),
+    Profile(),
+    Settings(),
+  ];
   int currentIndex = 0;
   void onTap(int index) {
     setState(() {
@@ -31,17 +36,48 @@ class _HomeMainState extends State<HomeMain> {
         type: BottomNavigationBarType.fixed,
         onTap: onTap,
         currentIndex: currentIndex,
-        showSelectedLabels: true,
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         elevation: 20,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey[500],
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded), label: "Profile"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings")
+              icon: SizedBox(
+                height: 22,
+                width: 22,
+                child: Image(
+                  image: AssetImage("assets/images/Home.png"),
+                ),
+              ),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: 22,
+                width: 22,
+                child: Image(
+                  image: AssetImage("assets/images/Discount.png"),
+                ),
+              ),
+              label: "Discount"),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: 22,
+                width: 22,
+                child: Image(
+                  image: AssetImage("assets/images/Profile.png"),
+                ),
+              ),
+              label: "Profile"),
+          BottomNavigationBarItem(
+              icon: SizedBox(
+                height: 22,
+                width: 22,
+                child: Image(
+                  image: AssetImage("assets/images/Papers.png"),
+                ),
+              ),
+              label: "Papers")
         ],
       ),
     );

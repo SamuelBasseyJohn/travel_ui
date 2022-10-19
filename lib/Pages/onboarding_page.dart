@@ -16,7 +16,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("FBFBFB"),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: const [
